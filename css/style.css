@@ -1,5 +1,6 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
   
 }
 
@@ -17,6 +18,12 @@ h1 {
   padding: 30px;
 }
 
+h2 {
+  /* controls Results */
+  font-size: 28px;
+  padding: 30 px;
+}
+
 ul {
   display: inline; 
 }
@@ -24,16 +31,34 @@ ul {
 li {
   display: inline;
 }
-
-header li {
-  margin-right: 10%;
+nav li{
+  padding: 10px 40px;
 }
 aside {
   width: 40%;
   height: 600px;
+  display: inline-block;
+  
+
+  /* sizing tool remove once before completion */
+  outline-color: #111111;
+  outline-style: dotted;
+  outline-width: 2px;
 }
 
 section {
-  display: inline;
-  width: 60%;
+  display: inline-block;
+  width: 59%;
+  height: 600px;
+
+  /* sizing tool remove once before completion */
+  outline-color: #111111;
+  outline-style: dotted;
+  outline-width: 2px;
+}
+
+footer {
+  width: 100%;
+  height: 150 px; 
+  background-color: #888888;
 }
