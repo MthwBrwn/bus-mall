@@ -38,12 +38,23 @@ PhotoSelect.imgThreeElement = document.getElementById('threePhoto');
 // track number of clicks by user (25)
 //track number of displays cannot have repeats
 PhotoSelect.randomPhoto = function() {
-  var randomArrayNum = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
-  console.log (randomArrayNum);
+  var randomArrayNumOne = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
+  var randomArrayNumTwo = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
+  var randomArrayNumThree = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
   
-  // set the src for the random picture 
-  PhotoSelect.imgOneElement.src = PhotoSelect.photoArray[randomArrayNum].path;
-  PhotoSelect.imgOneElement.alt = PhotoSelect.photoArray[randomArrayNum].altText;
+  
+  // set the src for the random pictures
+  // first image
+  PhotoSelect.imgOneElement.src = PhotoSelect.photoArray[randomArrayNumOne].path;
+  PhotoSelect.imgOneElement.alt = PhotoSelect.photoArray[randomArrayNumOne].altText;
+// second image
+  PhotoSelect.imgTwoElement.src = PhotoSelect.photoArray[randomArrayNumTwo].path;
+  PhotoSelect.imgTwoElement.alt = PhotoSelect.photoArray[randomArrayNumTwo].altText;
+  // third image
+  PhotoSelect.imgThreeElement.src = PhotoSelect.photoArray[randomArrayNumThree].path;
+  PhotoSelect.imgThreeElement.alt = PhotoSelect.photoArray[randomArrayNumThree].altText;
+
+
 
 };
 

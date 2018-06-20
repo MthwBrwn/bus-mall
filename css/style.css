@@ -5,11 +5,12 @@ body {
 }
 
 nav {
-  height: 300px ;
+  height: 400px ;
   background-color: #444444;
   width: 100%;
   background-image: url("../img/bus-3034479__340.png") ;
   background-repeat: no-repeat;
+  background-position-y: 75px;
  
 
 }
