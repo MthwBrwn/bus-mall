@@ -16,11 +16,14 @@ PhotoSelect.totalClicks = 0;
 PhotoSelect.lastDisplayed = [];
 PhotoSelect.totalVotes =[];
 
+
 // set up constructor method for pictures
 function PhotoSelect(name, path, altText) {
   this.name= name;
   this.path= path;
   this.altText= altText;
+  this.picks;
+  this.timesDisplayed = 0;
   PhotoSelect.photoArray.push(this);
   
   
@@ -39,46 +42,52 @@ PhotoSelect.imgThreeElement = document.getElementById('threePhoto');
 //track number of displays cannot have repeats
 PhotoSelect.randomPhoto = function() {
   do{
-    var randomArrayNumOne = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
-    var randomArrayNumTwo = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
-    var randomArrayNumThree = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
+    var randomPicNumOne = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
+    var randomPicNumTwo = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
+    var randomPicNumThree = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
     // set the src for the random pictures
     // first image
-    PhotoSelect.imgOneElement.src = PhotoSelect.photoArray[randomArrayNumOne].path;
-    PhotoSelect.imgOneElement.alt = PhotoSelect.photoArray[randomArrayNumOne].altText;
-    // second image
-    PhotoSelect.imgTwoElement.src = PhotoSelect.photoArray[randomArrayNumTwo].path;
-    PhotoSelect.imgTwoElement.alt = PhotoSelect.photoArray[randomArrayNumTwo].altText;
-    // third image
-    PhotoSelect.imgThreeElement.src = PhotoSelect.photoArray[randomArrayNumThree].path;
-    PhotoSelect.imgThreeElement.alt = PhotoSelect.photoArray[randomArrayNumThree].altText;
-  
-  }while (randomArrayNumOne === randomArrayNumTwo || randomArrayNumOne === randomArrayNumThree ||
-  PhotoSelect.lastDisplayed.includes(randomArrayNumOne)||
-  PhotoSelect.lastDisplayed.includes(randomArrayNumTwo)||
-  PhotoSelect.lastDisplayed.includes(randomArrayNumThree)
+  }while (randomPicNumOne === randomPicNumTwo || randomPicNumOne === randomPicNumThree ||
+    randomPicNumTwo === randomPicNumThree||
+    PhotoSelect.lastDisplayed.includes(randomPicNumOne)||
+    PhotoSelect.lastDisplayed.includes(randomPicNumTwo)||
+    PhotoSelect.lastDisplayed.includes(randomPicNumThree)
   );
 
+  PhotoSelect.imgOneElement.src = PhotoSelect.photoArray[randomPicNumOne].path;
+  PhotoSelect.imgOneElement.alt = PhotoSelect.photoArray[randomPicNumOne].altText;
+  // second image
+  PhotoSelect.imgTwoElement.src = PhotoSelect.photoArray[randomPicNumTwo].path;
+  PhotoSelect.imgTwoElement.alt = PhotoSelect.photoArray[randomPicNumTwo].altText;
+  // third image
+  PhotoSelect.imgThreeElement.src = PhotoSelect.photoArray[randomPicNumThree].path;
+  PhotoSelect.imgThreeElement.alt = PhotoSelect.photoArray[randomPicNumThree].altText;
+
   // need to set last displayed array
-  PhotoSelect.lastDisplayed[0] = randomArrayNumOne;
-  PhotoSelect.lastDisplayed[1] = randomArrayNumTwo;
-  PhotoSelect.lastDisplayed[2] = randomArrayNumThree;
+  PhotoSelect.lastDisplayed[0] = randomPicNumOne;
+  PhotoSelect.lastDisplayed[1] = randomPicNumTwo;
+  PhotoSelect.lastDisplayed[2] = randomPicNumThree;
+
+  // increment number of times displayed
+  PhotoSelect.photoArray[randomPicNumOne].timesDisplayed++;
+  PhotoSelect.photoArray[randomPicNumTwo].timesDisplayed++;
+  PhotoSelect.photoArray[randomPicNumThree].timesDisplayed++;
 };
 
 // event listener method
 PhotoSelect.clickAction = function (event) {
   PhotoSelect.totalClicks++;
-  console.log('words');
   console.log(PhotoSelect.totalClicks);
   for (var i in PhotoSelect.photoArray) {
     if (event.target.alt === PhotoSelect.photoArray[i].altText) {
-      PhotoSelect.photoArray[i].totalVotes;
-      console.log("total votes: ", PhotoSelect.totalVotes);
+      PhotoSelect.photoArray[i].picks++;
+      console.log("picks: ", PhotoSelect.photoArray.picks);
     }
   }
   // once 25 steps are done, - dispay results to user 
+ 
   // removeEvent listener
-  if (PhotoSelect.totalClicks > 3) {
+  if (PhotoSelect.totalClicks > 5) {
     PhotoSelect.photoEventElement.removeEventListener('click', PhotoSelect.clickAction);
     // need to show list 
     // need to calcuate Votes
@@ -109,17 +118,15 @@ new PhotoSelect('bubblegum', 'img/bubblegum.jpg' , 'meatball flavored bubble gum
 
 new PhotoSelect('chair', 'img/chair.jpg' , 'a convex shaped chair' );
 
-new PhotoSelect('cthulu', 'img/cthulu.jpg' , 'A monster of vaguely anthropoid outline, but with an octopus-like head whose face was a mass of feelers, a scaly, rubbery-looking body, prodigious claws on hind and fore feet, and long, narrow wings behind');
+new PhotoSelect('cthulhu', 'img/cthulhu.jpg' , 'A monster of vaguely anthropoid outline, but with an octopus-like head whose face was a mass of feelers, a scaly, rubbery-looking body, prodigious claws on hind and fore feet, and long, narrow wings behind');
 
 
-// Goat.imgElement.addEventListener 
 //need event listener for 'click'
 PhotoSelect.photoEventElement.addEventListener('click', PhotoSelect.clickAction);
 
 
-// need way to prevent similar selections (for loop)
 
-// increment number of times displayed
+
 
 
 
