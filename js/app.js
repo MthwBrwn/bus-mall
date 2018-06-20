@@ -15,7 +15,7 @@ PhotoSelect.listEl = document.getElementById('listBuild');
 PhotoSelect.totalClicks = 0;
 PhotoSelect.lastDisplayed = [];
 PhotoSelect.totalVotes =[];
-PhotoSelect.maxClicks = 5;
+PhotoSelect.maxClicks = 25;
 PhotoSelect.names = [];
 
 
@@ -148,7 +148,8 @@ new PhotoSelect('Unicorn meat', 'img/unicorn.jpg' , 'Unicorn meat');
 new PhotoSelect('Tentacle USB', 'img/usb.gif' , 'A USB storage stick shaped like a tentacle');
 new PhotoSelect('Endless watering can', 'img/water-can.jpg' , 'A watering can whose spigot is turned back into the can ');
 new PhotoSelect('Off center wineglass', 'img/wine-glass.jpg' , 'A wineglass with an off-center lip');
-
+// instantiate first set
+PhotoSelect.randomPhoto();
 //need event listener for 'click'
 PhotoSelect.photoEventElement.addEventListener('click', PhotoSelect.clickAction);
 
