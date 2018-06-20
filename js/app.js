@@ -90,12 +90,25 @@ PhotoSelect.clickAction = function (event) {
   if (PhotoSelect.totalClicks > 5) {
     PhotoSelect.photoEventElement.removeEventListener('click', PhotoSelect.clickAction);
     // need to show list 
+    PhotoSelect.renderList();
+
     // need to calcuate Votes
     // 
   }else {
     PhotoSelect.randomPhoto();
   }
 
+};
+
+PhotoSelect.renderList = function() {
+  var itemOneEl = document.createElement('li');
+  itemOneEl.textContent = `Thank you for your selections! `;
+  PhotoSelect.listEl.appendChild(itemOneEl);
+  for (var i in PhotoSelect.photoArray){
+    var itemTwoEl = document.createElement('li');
+    itemTwoEl.textContent = ` ${PhotoSelect.photoArray[i].name} has ${PhotoSelect.photoArray[i].picks} votes and was displayed ${PhotoSelect.photoArray[i].timesDisplayed} times.`;
+    PhotoSelect.listEl.appendChild(itemTwoEl);
+  }
 };
 
 
