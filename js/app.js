@@ -15,6 +15,9 @@ PhotoSelect.listEl = document.getElementById('listBuild');
 PhotoSelect.totalClicks = 0;
 PhotoSelect.lastDisplayed = [];
 PhotoSelect.totalVotes =[];
+PhotoSelect.maxClicks = 5;
+PhotoSelect.names = [];
+
 
 
 // set up constructor method for pictures
@@ -22,7 +25,7 @@ function PhotoSelect(name, path, altText) {
   this.name= name;
   this.path= path;
   this.altText= altText;
-  this.picks;
+  this.picks = 0;
   this.timesDisplayed = 0;
   PhotoSelect.photoArray.push(this);
   
@@ -87,7 +90,7 @@ PhotoSelect.clickAction = function (event) {
   // once 25 steps are done, - dispay results to user 
  
   // removeEvent listener
-  if (PhotoSelect.totalClicks > 25) {
+  if (PhotoSelect.totalClicks > PhotoSelect.maxClicks) {
     PhotoSelect.photoEventElement.removeEventListener('click', PhotoSelect.clickAction);
     // need to show list 
     PhotoSelect.renderList();
@@ -111,6 +114,14 @@ PhotoSelect.renderList = function() {
   }
 };
 
+PhotoSelect.updateVotes = function() {
+  for(var i in PhotoSelect.photoArray[i]) {
+    
+    PhotoSelect.totalVotes[i] = PhotoSelect.photoArray[i].picks;
+    PhotoSelect.names[i] = PhotoSelect.photoArray[i].name;
+  }
+};
+
 
   
 
@@ -131,10 +142,10 @@ new PhotoSelect('Pen utensils ', 'img/pen.jpg' , 'A pen with a fork knofe and sp
 new PhotoSelect('Pet sweep', 'img/pet-sweep.jpg' , 'Sweeper attachment for your pets');
 new PhotoSelect('Pizza Scissors', 'img/scissors.jpg' , 'a combination scissor/pizza server');
 new PhotoSelect('Shark bag', 'img/shark.jpg' , 'A shark shaped sleeping bag');
-new PhotoSelect('Baby sweeper', 'img/sweep.jpg' , 'A combination floor mop/ baby onesie');
+new PhotoSelect('Baby sweeper', 'img/sweep.png' , 'A combination floor mop/ baby onesie');
 new PhotoSelect('Tauntaun', 'img/tauntaun.jpg' , 'A tauntaun shaped sleeping bag');
 new PhotoSelect('Unicorn meat', 'img/unicorn.jpg' , 'Unicorn meat');
-new PhotoSelect('Tentacle USB', 'img/usb.jpg' , 'A USB storage stick shaped like a tentacle');
+new PhotoSelect('Tentacle USB', 'img/usb.gif' , 'A USB storage stick shaped like a tentacle');
 new PhotoSelect('Endless watering can', 'img/water-can.jpg' , 'A watering can whose spigot is turned back into the can ');
 new PhotoSelect('Off center wineglass', 'img/wine-glass.jpg' , 'A wineglass with an off-center lip');
 
@@ -142,12 +153,45 @@ new PhotoSelect('Off center wineglass', 'img/wine-glass.jpg' , 'A wineglass with
 PhotoSelect.photoEventElement.addEventListener('click', PhotoSelect.clickAction);
 
 
+// PhotoSelect.renderChart = function () {
+//   var context = document.getElementById('results-chart'). getContext('2d');
+//   var chartColors =  ['red','green','blue','#fff'];
+
+//   Var photoChart = new Chart (context, {
+//     type: 'bar',
+//     data : {
+//       labels: PhotoSelect.names,
+//       datasets: [{
+//         label: 'votes for Photos',
+//         data: PhotoSelect.totalClicks, 
+//         backgroundColors: chartColors
+//       }],
+//     },
+//     options:{
+//       scales:{
+//         yAxes:[{
+//           tick:{
+//             beginAtZero: true,
+//           }
+//         }],
+//         xAxes:[{
+//           tick:{
+//             autoskip: false,
+//           }
+//         }]
+
+        
+//       }
+//     }
+//   });
+
+// };
 
 
 
 
 
-// test instantiation
-// PhotoSelect.randomPhoto();
+// // test instantiation
+// // PhotoSelect.randomPhoto();
 
 
