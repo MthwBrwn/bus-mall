@@ -41,6 +41,14 @@ li {
 nav li{
   padding: 10px 40px;
 }
+
+aside li {
+  font-size: 10 px;
+  list-style-type: circle;
+  display: block;
+  
+}
+
 aside {
   width: 40%;
   height: 600px;
