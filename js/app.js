@@ -45,7 +45,6 @@ PhotoSelect.randomPhoto = function() {
   PhotoSelect.imgOneElement.src = PhotoSelect.photoArray[randomArrayNum].path;
   PhotoSelect.imgOneElement.alt = PhotoSelect.photoArray[randomArrayNum].altText;
 
-  
 };
 
 // event listener method
@@ -56,6 +55,7 @@ PhotoSelect.clickAction = function (event) {
   for (var i in PhotoSelect.photoArray) {
     if (event.target.alt === PhotoSelect.photoArray[i].altText) {
       PhotoSelect.photoArray[i].totalVotes;
+      console.log("total votes: ", PhotoSelect.totalVotes);
     }
   }
   // once 25 steps are done, - dispay results to user 
@@ -70,6 +70,7 @@ PhotoSelect.clickAction = function (event) {
   }
 
 };
+
 
   
 
