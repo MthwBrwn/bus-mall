@@ -13,7 +13,7 @@ PhotoSelect.photoArray = [];
 // get Element for list
 PhotoSelect.listEl = document.getElementById('listBuild');
 PhotoSelect.totalClicks = 0;
-
+PhotoSelect.lastDisplayed = [];
 PhotoSelect.totalVotes =[];
 
 // set up constructor method for pictures
@@ -28,7 +28,7 @@ function PhotoSelect(name, path, altText) {
 }
 
 // get elements
-PhotoSelect.photoEventElement = document.getElementById("photoUL")
+PhotoSelect.photoEventElement = document.getElementById('photoUl');
 PhotoSelect.imgOneElement = document.getElementById('onePhoto');
 PhotoSelect.imgTwoElement = document.getElementById('twoPhoto');
 PhotoSelect.imgThreeElement = document.getElementById('threePhoto');
@@ -44,21 +44,36 @@ PhotoSelect.randomPhoto = function() {
   // set the src for the random picture 
   PhotoSelect.imgOneElement.src = PhotoSelect.photoArray[randomArrayNum].path;
   PhotoSelect.imgOneElement.alt = PhotoSelect.photoArray[randomArrayNum].altText;
-  return randomArrayNum;
+
+  
 };
 
 // event listener method
 PhotoSelect.clickAction = function (event) {
   PhotoSelect.totalClicks++;
-  console.log(this.totalClicks);
+  console.log('words');
+  console.log(PhotoSelect.totalClicks);
   for (var i in PhotoSelect.photoArray) {
     if (event.target.alt === PhotoSelect.photoArray[i].altText) {
       PhotoSelect.photoArray[i].totalVotes;
     }
   }
+  // once 25 steps are done, - dispay results to user 
+  // removeEvent listener
+  if (PhotoSelect.totalClicks > 3) {
+    PhotoSelect.photoEventElement.removeEventListener('click', PhotoSelect.clickAction);
+    // need to show list 
+    // need to calcuate Votes
+    // 
+  }else {
+    PhotoSelect.randomPhoto();
+  }
+
 };
 
-// removeEvent listener
+  
+
+
 
 // set array for photos ( use constructor)
 new PhotoSelect('bag', 'img/bag.jpg' , 'a bag shaped like R2-D2' );
@@ -80,14 +95,12 @@ PhotoSelect.photoEventElement.addEventListener('click', PhotoSelect.clickAction)
 
 
 // need way to prevent similar selections (for loop)
-// once 25 steps are done, - dispay results to user 
 
 // increment number of times displayed
 
-// <!-- set up js to get element by ID -->
 
 
 // test instantiation
-PhotoSelect.randomPhoto();
+// PhotoSelect.randomPhoto();
 
 
