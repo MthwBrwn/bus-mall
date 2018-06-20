@@ -12,7 +12,9 @@
 PhotoSelect.photoArray = [];
 // get Element for list
 PhotoSelect.listEl = document.getElementById('listBuild');
+PhotoSelect.totalClicks = 0;
 
+PhotoSelect.totalVotes =[];
 
 // set up constructor method for pictures
 function PhotoSelect(name, path, altText) {
@@ -20,11 +22,13 @@ function PhotoSelect(name, path, altText) {
   this.path= path;
   this.altText= altText;
   PhotoSelect.photoArray.push(this);
-
+  
+  
   console.log(PhotoSelect.photoArray);
 }
 
 // get elements
+PhotoSelect.photoEventElement = document.getElementById("photoUL")
 PhotoSelect.imgOneElement = document.getElementById('onePhoto');
 PhotoSelect.imgTwoElement = document.getElementById('twoPhoto');
 PhotoSelect.imgThreeElement = document.getElementById('threePhoto');
@@ -39,6 +43,19 @@ PhotoSelect.randomPhoto = function() {
   
   // set the src for the random picture 
   PhotoSelect.imgOneElement.src = PhotoSelect.photoArray[randomArrayNum].path;
+  PhotoSelect.imgOneElement.alt = PhotoSelect.photoArray[randomArrayNum].altText;
+  return randomArrayNum;
+};
+
+// event listener method
+PhotoSelect.clickAction = function (event) {
+  PhotoSelect.totalClicks++;
+  console.log(this.totalClicks);
+  for (var i in PhotoSelect.photoArray) {
+    if (event.target.alt === PhotoSelect.photoArray[i].altText) {
+      PhotoSelect.photoArray[i].totalVotes;
+    }
+  }
 };
 
 // removeEvent listener
@@ -46,20 +63,20 @@ PhotoSelect.randomPhoto = function() {
 // set array for photos ( use constructor)
 new PhotoSelect('bag', 'img/bag.jpg' , 'a bag shaped like R2-D2' );
 
-// new PhotoSelect('banana', '../img/banana' , 'a banana shaped banana slicer' );
+new PhotoSelect('banana', 'img/banana.jpg' , 'a banana shaped banana slicer' );
 
-// new PhotoSelect('bathroom', '../img/bathroom' , 'a combination toilet paper roll/ tablet holder' );
+new PhotoSelect('bathroom', 'img/bathroom.jpg' , 'a combination toilet paper roll/ tablet holder' );
 
-// new PhotoSelect('boots', '../img/boots' , 'soleless and toeless rain boots ' );
+new PhotoSelect('boots', 'img/boots.jpg' , 'soleless and toeless rain boots ' );
 
-// new PhotoSelect('breakfast', '../img/breakfast' , 'combination oven egg pan and coffee pot' );
+new PhotoSelect('breakfast', 'img/breakfast.jpg' , 'combination oven egg pan and coffee pot' );
 
-// new PhotoSelect('bubblegum', '../img/bubblegum' , 'meatball flavored bubble gum' );
+new PhotoSelect('bubblegum', 'img/bubblegum.jpg' , 'meatball flavored bubble gum' );
 
 
 // Goat.imgElement.addEventListener 
 //need event listener for 'click'
-
+PhotoSelect.photoEventElement.addEventListener('click', PhotoSelect.clickAction);
 
 
 // need way to prevent similar selections (for loop)
