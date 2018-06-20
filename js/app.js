@@ -38,24 +38,31 @@ PhotoSelect.imgThreeElement = document.getElementById('threePhoto');
 // track number of clicks by user (25)
 //track number of displays cannot have repeats
 PhotoSelect.randomPhoto = function() {
-  var randomArrayNumOne = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
-  var randomArrayNumTwo = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
-  var randomArrayNumThree = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
+  do{
+    var randomArrayNumOne = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
+    var randomArrayNumTwo = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
+    var randomArrayNumThree = Math.trunc(Math.random() * PhotoSelect.photoArray.length);
+    // set the src for the random pictures
+    // first image
+    PhotoSelect.imgOneElement.src = PhotoSelect.photoArray[randomArrayNumOne].path;
+    PhotoSelect.imgOneElement.alt = PhotoSelect.photoArray[randomArrayNumOne].altText;
+    // second image
+    PhotoSelect.imgTwoElement.src = PhotoSelect.photoArray[randomArrayNumTwo].path;
+    PhotoSelect.imgTwoElement.alt = PhotoSelect.photoArray[randomArrayNumTwo].altText;
+    // third image
+    PhotoSelect.imgThreeElement.src = PhotoSelect.photoArray[randomArrayNumThree].path;
+    PhotoSelect.imgThreeElement.alt = PhotoSelect.photoArray[randomArrayNumThree].altText;
   
-  
-  // set the src for the random pictures
-  // first image
-  PhotoSelect.imgOneElement.src = PhotoSelect.photoArray[randomArrayNumOne].path;
-  PhotoSelect.imgOneElement.alt = PhotoSelect.photoArray[randomArrayNumOne].altText;
-// second image
-  PhotoSelect.imgTwoElement.src = PhotoSelect.photoArray[randomArrayNumTwo].path;
-  PhotoSelect.imgTwoElement.alt = PhotoSelect.photoArray[randomArrayNumTwo].altText;
-  // third image
-  PhotoSelect.imgThreeElement.src = PhotoSelect.photoArray[randomArrayNumThree].path;
-  PhotoSelect.imgThreeElement.alt = PhotoSelect.photoArray[randomArrayNumThree].altText;
+  }while (randomArrayNumOne === randomArrayNumTwo || randomArrayNumOne === randomArrayNumThree ||
+  PhotoSelect.lastDisplayed.includes(randomArrayNumOne)||
+  PhotoSelect.lastDisplayed.includes(randomArrayNumTwo)||
+  PhotoSelect.lastDisplayed.includes(randomArrayNumThree)
+  );
 
-
-
+  // need to set last displayed array
+  PhotoSelect.lastDisplayed[0] = randomArrayNumOne;
+  PhotoSelect.lastDisplayed[1] = randomArrayNumTwo;
+  PhotoSelect.lastDisplayed[2] = randomArrayNumThree;
 };
 
 // event listener method
@@ -99,6 +106,10 @@ new PhotoSelect('boots', 'img/boots.jpg' , 'soleless and toeless rain boots ' );
 new PhotoSelect('breakfast', 'img/breakfast.jpg' , 'combination oven egg pan and coffee pot' );
 
 new PhotoSelect('bubblegum', 'img/bubblegum.jpg' , 'meatball flavored bubble gum' );
+
+new PhotoSelect('chair', 'img/chair.jpg' , 'a convex shaped chair' );
+
+new PhotoSelect('cthulu', 'img/cthulu.jpg' , 'A monster of vaguely anthropoid outline, but with an octopus-like head whose face was a mass of feelers, a scaly, rubbery-looking body, prodigious claws on hind and fore feet, and long, narrow wings behind');
 
 
 // Goat.imgElement.addEventListener 
