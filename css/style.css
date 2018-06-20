@@ -8,6 +8,8 @@ nav {
   height: 300px ;
   background-color: #444444;
   width: 100%;
+  background-image: url("../img/bus-3034479__340.png") ;
+  background-repeat: no-repeat;
  
 
 }
@@ -15,13 +17,17 @@ nav {
 h1 {
   font-size: 30px; 
   font-family: fantasy;
-  padding: 30px;
+  padding: 2%;
 }
 
 h2 {
   /* controls Results */
   font-size: 28px;
-  padding: 30 px;
+  padding: 2%;
+}
+
+p {
+  padding:1%;
 }
 
 ul {
@@ -66,3 +72,13 @@ footer {
   height: 150 px; 
   background-color: #888888;
 }
+
+img {
+  width: 25%;
+  padding-right: 1%;
+}
+
+/* img:first-child {
+  padding-left: 1%;
+
+} */
