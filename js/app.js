@@ -154,6 +154,8 @@ PhotoSelect.randomPhoto();
 //need event listener for 'click'
 PhotoSelect.photoEventElement.addEventListener('click', PhotoSelect.clickAction);
 
+
+
 PhotoSelect.renderChart = function () {
   // var context = document.getElementById('results-chart'). getContext('2d');
   var chartColors =  [
@@ -184,7 +186,7 @@ PhotoSelect.renderChart = function () {
   //   type: 'bar',
   //   // dataPointMaxWidth: 5,
   //   data: {
-  //     labels: PhotoSelect.names,
+  //     labels: ,
   //     datasets: [{
   //       label: 'votes for Photos',
   //       data: PhotoSelect.totalVotes,
@@ -216,9 +218,9 @@ PhotoSelect.renderChart = function () {
 
   var ctx = document.getElementById("results-chart").getContext('2d');
   var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'column',
     data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      labels: PhotoSelect.names,
       datasets: [{
         label: 'Votes for Photos',
         data: PhotoSelect.totalVotes,
