@@ -33,6 +33,7 @@ p {
 
 ul {
   display: inline; 
+  overflow-y: scroll;
 }
 
 li {
