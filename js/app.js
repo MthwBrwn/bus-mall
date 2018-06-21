@@ -182,38 +182,7 @@ PhotoSelect.renderChart = function () {
     '#000000'
   ];
 
-  // var photoChart = new Chart(context, {
-  //   type: 'bar',
-
-  //   data: {
-  //     labels: ,
-  //     datasets: [{
-  //       label: 'votes for Photos',
  
-  //     }],
-  //   },
-  //   options:{
-  //     scales:{
-  //       yAxes:[{
-          
-  //         tick:{
-  //           beginAtZero: true,
-  //           tickLength: 1,
-  //         }
-  //       }],
-  //       axisX:[{
-  //         labelAutoFit: true,
-  //         labelAngle: 80
-  //         // tick:{
-  //         // }
-  //       }]
-
-
-  //     }
-  //   }
-  // });
-
-// };
 
   var ctx = document.getElementById("results-chart").getContext('2d');
   var myChart = new Chart(ctx, {
@@ -241,3 +210,15 @@ PhotoSelect.renderChart = function () {
     }
   });
 };
+
+// what is needed for storage ? 
+// need to store PhotoSelect.totalVotes =[];
+// PhotoSelect.names = [];
+// user name field could be added - this info stored. 
+
+// -need to test if local storage is available 
+// -need to write function for save click and run at each click 
+// -need to write function resumeClick and run after local storage test
+// -storage --> into data if storage is present 
+//- click counter will need to be adjusted to allow for 25 more clicks and also remove evne listener after 25 more clicks 
+-  
