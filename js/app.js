@@ -1,7 +1,7 @@
 'use strict';
 
 /* <li> <img id = "onePhoto" src="http://via.placeholder.com/300x300" alt=""> </li>
-<li> <img id = "twoPhoto" src="http://via.placeholder.com/300x300" alt=""> </li>  
+<li> <img id = "twoPhoto" src="http://via.placeholder.com/300x300" alt=""> </li>
 <li> <img id = "threePhoto" src="http://via.placeholder.com/300x300" alt=""> </li> */
 
 
@@ -15,8 +15,8 @@ PhotoSelect.listEl = document.getElementById('listBuild');
 PhotoSelect.totalClicks = 0;
 PhotoSelect.lastDisplayed = [];
 PhotoSelect.totalVotes =[];
-PhotoSelect.maxClicks = 25;
 PhotoSelect.names = [];
+PhotoSelect.maxClicks = 25;
 
 
 
@@ -28,10 +28,10 @@ function PhotoSelect(name, path, altText) {
   this.picks = 0;
   this.timesDisplayed = 0;
   PhotoSelect.photoArray.push(this);
-  
-  
-  console.log(PhotoSelect.photoArray);
+
+
 }
+// console.log(PhotoSelect.photoArray);
 
 // get elements
 PhotoSelect.photoEventElement = document.getElementById('photoUl');
@@ -80,23 +80,25 @@ PhotoSelect.randomPhoto = function() {
 // event listener method
 PhotoSelect.clickAction = function (event) {
   PhotoSelect.totalClicks++;
-  console.log(PhotoSelect.totalClicks);
+  // console.log(PhotoSelect.totalClicks);
   for (var i in PhotoSelect.photoArray) {
     if (event.target.alt === PhotoSelect.photoArray[i].altText) {
       PhotoSelect.photoArray[i].picks++;
-      console.log("picks: ", PhotoSelect.photoArray[i].picks);
+      // console.log('picks: ', PhotoSelect.photoArray[i].picks);
     }
   }
-  // once 25 steps are done, - dispay results to user 
- 
+  // once 25 steps are done, - dispay results to user
+
   // removeEvent listener
-  if (PhotoSelect.totalClicks > PhotoSelect.maxClicks) {
+  if (PhotoSelect.totalClicks === PhotoSelect.maxClicks) {
     PhotoSelect.photoEventElement.removeEventListener('click', PhotoSelect.clickAction);
-    // need to show list 
+    // need to show list
     PhotoSelect.renderList();
+    PhotoSelect.updateVotes();
+    PhotoSelect.renderChart();
 
     // need to calcuate Votes
-    // 
+    //
   }else {
     PhotoSelect.randomPhoto();
   }
@@ -105,7 +107,7 @@ PhotoSelect.clickAction = function (event) {
 
 PhotoSelect.renderList = function() {
   var itemOneEl = document.createElement('li');
-  itemOneEl.textContent = `Thank you for your selections! `;
+  itemOneEl.textContent = 'Thank you for your selections! ';
   PhotoSelect.listEl.appendChild(itemOneEl);
   for (var i in PhotoSelect.photoArray){
     var itemTwoEl = document.createElement('li');
@@ -115,20 +117,19 @@ PhotoSelect.renderList = function() {
 };
 
 PhotoSelect.updateVotes = function() {
-  for(var i in PhotoSelect.photoArray[i]) {
-    
-    PhotoSelect.totalVotes[i] = PhotoSelect.photoArray[i].picks;
-    PhotoSelect.names[i] = PhotoSelect.photoArray[i].name;
+  for(var i in PhotoSelect.photoArray) {
+    console.log('picks: ', PhotoSelect.photoArray[i].picks);
+    PhotoSelect.totalVotes.push(PhotoSelect.photoArray[i].picks);
+    console.log('totalVotes: ',PhotoSelect.totalVotes);
+    PhotoSelect.names.push(PhotoSelect.photoArray[i].name);
   }
+
+
 };
 
 
-  
-
-
-
 // set array for photos ( use constructor)
-new PhotoSelect('Bag', 'img/bag.jpg' , 'a bag shaped like R2-D2' );
+new PhotoSelect('R2D2 Bag', 'img/bag.jpg' , 'a bag shaped like R2-D2' );
 new PhotoSelect('Banana', 'img/banana.jpg' , 'a banana shaped banana slicer' );
 new PhotoSelect('Bathroom', 'img/bathroom.jpg' , 'a combination toilet paper roll/ tablet holder' );
 new PhotoSelect('Boots', 'img/boots.jpg' , 'soleless and toeless rain boots ' );
@@ -154,45 +155,89 @@ PhotoSelect.randomPhoto();
 PhotoSelect.photoEventElement.addEventListener('click', PhotoSelect.clickAction);
 
 
-// PhotoSelect.renderChart = function () {
-//   var context = document.getElementById('results-chart'). getContext('2d');
-//   var chartColors =  ['red','green','blue','#fff'];
 
-//   Var photoChart = new Chart (context, {
-//     type: 'bar',
-//     data : {
-//       labels: PhotoSelect.names,
-//       datasets: [{
-//         label: 'votes for Photos',
-//         data: PhotoSelect.totalClicks, 
-//         backgroundColors: chartColors
-//       }],
-//     },
-//     options:{
-//       scales:{
-//         yAxes:[{
-//           tick:{
-//             beginAtZero: true,
-//           }
-//         }],
-//         xAxes:[{
-//           tick:{
-//             autoskip: false,
-//           }
-//         }]
+PhotoSelect.renderChart = function () {
+  // var context = document.getElementById('results-chart'). getContext('2d');
+  var chartColors =  [
+    '#e6194b',
+    '#3cb44b',
+    '#ffe119',
+    '#0082c8',
+    '#f58231',
+    '#911eb4',
+    '#46f0f0',
+    '#f032e6',
+    '#d2f53c',
+    '#fabebe',
+    '#008080',
+    '#e6beff',
+    '#aa6e28',
+    '#fffac8',
+    '#800000',
+    '#aaffc3',
+    '#808000',
+    '#ffd8b1',
+    '#000080',
+    '#808080',
+    '#000000'
+  ];
 
-        
-//       }
-//     }
-//   });
+  // var photoChart = new Chart(context, {
+  //   type: 'bar',
+
+  //   data: {
+  //     labels: ,
+  //     datasets: [{
+  //       label: 'votes for Photos',
+ 
+  //     }],
+  //   },
+  //   options:{
+  //     scales:{
+  //       yAxes:[{
+          
+  //         tick:{
+  //           beginAtZero: true,
+  //           tickLength: 1,
+  //         }
+  //       }],
+  //       axisX:[{
+  //         labelAutoFit: true,
+  //         labelAngle: 80
+  //         // tick:{
+  //         // }
+  //       }]
+
+
+  //     }
+  //   }
+  // });
 
 // };
 
+  var ctx = document.getElementById("results-chart").getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: PhotoSelect.names,
+      datasets: [{
+        label: 'Votes for Photos',
+        labelAngle: 90,
+        data: PhotoSelect.totalVotes,
+        backgroundColor: chartColors,
+        borderColor: chartColors,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
 
-
-
-
-// // test instantiation
-// // PhotoSelect.randomPhoto();
-
-
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+};
