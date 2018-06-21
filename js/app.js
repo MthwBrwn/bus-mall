@@ -16,7 +16,7 @@ PhotoSelect.totalClicks = 0;
 PhotoSelect.lastDisplayed = [];
 PhotoSelect.totalVotes =[];
 PhotoSelect.names = [];
-PhotoSelect.maxClicks = 5;
+PhotoSelect.maxClicks = 25;
 
 
 
@@ -129,7 +129,7 @@ PhotoSelect.updateVotes = function() {
 
 
 // set array for photos ( use constructor)
-new PhotoSelect('Bag', 'img/bag.jpg' , 'a bag shaped like R2-D2' );
+new PhotoSelect('R2D2 Bag', 'img/bag.jpg' , 'a bag shaped like R2-D2' );
 new PhotoSelect('Banana', 'img/banana.jpg' , 'a banana shaped banana slicer' );
 new PhotoSelect('Bathroom', 'img/bathroom.jpg' , 'a combination toilet paper roll/ tablet holder' );
 new PhotoSelect('Boots', 'img/boots.jpg' , 'soleless and toeless rain boots ' );
@@ -184,13 +184,12 @@ PhotoSelect.renderChart = function () {
 
   // var photoChart = new Chart(context, {
   //   type: 'bar',
-  //   // dataPointMaxWidth: 5,
+
   //   data: {
   //     labels: ,
   //     datasets: [{
   //       label: 'votes for Photos',
-  //       data: PhotoSelect.totalVotes,
-  //       color: chartColors
+ 
   //     }],
   //   },
   //   options:{
@@ -218,11 +217,12 @@ PhotoSelect.renderChart = function () {
 
   var ctx = document.getElementById("results-chart").getContext('2d');
   var myChart = new Chart(ctx, {
-    type: 'column',
+    type: 'bar',
     data: {
       labels: PhotoSelect.names,
       datasets: [{
         label: 'Votes for Photos',
+        labelAngle: 90,
         data: PhotoSelect.totalVotes,
         backgroundColor: chartColors,
         borderColor: chartColors,
@@ -232,6 +232,7 @@ PhotoSelect.renderChart = function () {
     options: {
       scales: {
         yAxes: [{
+
           ticks: {
             beginAtZero:true
           }
