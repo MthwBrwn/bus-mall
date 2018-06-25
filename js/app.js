@@ -96,6 +96,7 @@ PhotoSelect.clickAction = function (event) {
     PhotoSelect.renderList();
     PhotoSelect.updateVotes();
     PhotoSelect.renderChart();
+    PhotoSelect.saveLocalStorage();
 
     // need to calcuate Votes
     //
@@ -116,6 +117,25 @@ PhotoSelect.renderList = function() {
   }
 };
 
+PhotoSelect.atStartCheckLocalStorage = function () {
+  if (localStorage.getItem('photoArray')){
+    PhotoSelect.loadLocalStorage();
+  }else {
+    PhotoSelect.saveLocalStorage();
+  }
+};
+
+PhotoSelect.loadLocalStorage = function () {
+  var fromStorePhotoArray = localStorage.getItem('photoArray');
+  PhotoSelect.photoArray=JSON.parse(fromStorePhotoArray);
+};
+
+// stringify the data to save in local storage
+PhotoSelect.saveLocalStorage = function () {
+  var toStorePhotoArray = JSON.stringify(PhotoSelect.photoArray);
+  localStorage.setItem('photoArray', toStorePhotoArray);
+};
+
 PhotoSelect.updateVotes = function() {
   for(var i in PhotoSelect.photoArray) {
     console.log('picks: ', PhotoSelect.photoArray[i].picks);
@@ -126,35 +146,6 @@ PhotoSelect.updateVotes = function() {
 
 
 };
-
-
-// set array for photos ( use constructor)
-new PhotoSelect('R2D2 Bag', 'img/bag.jpg' , 'a bag shaped like R2-D2' );
-new PhotoSelect('Banana', 'img/banana.jpg' , 'a banana shaped banana slicer' );
-new PhotoSelect('Bathroom', 'img/bathroom.jpg' , 'a combination toilet paper roll/ tablet holder' );
-new PhotoSelect('Boots', 'img/boots.jpg' , 'soleless and toeless rain boots ' );
-new PhotoSelect('Breakfast', 'img/breakfast.jpg' , 'combination oven egg pan and coffee pot' );
-new PhotoSelect('Bubblegum', 'img/bubblegum.jpg' , 'meatball flavored bubble gum' );
-new PhotoSelect('Chair', 'img/chair.jpg' , 'a convex shaped chair' );
-new PhotoSelect('Cthulhu', 'img/cthulhu.jpg' , 'A monster of vaguely anthropoid outline, but with an octopus-like head whose face was a mass of feelers, a scaly, rubbery-looking body, prodigious claws on hind and fore feet, and long, narrow wings behind');
-new PhotoSelect('Dog-duck', 'img/dog-duck.jpg' , 'A picture of a dog with a plastic duck bill');
-new PhotoSelect('Dragon meat', 'img/dragon.jpg' , 'A can of dragon meat');
-new PhotoSelect('Pen utensils ', 'img/pen.jpg' , 'A pen with a fork knofe and spoon attachment');
-new PhotoSelect('Pet sweep', 'img/pet-sweep.jpg' , 'Sweeper attachment for your pets');
-new PhotoSelect('Pizza Scissors', 'img/scissors.jpg' , 'a combination scissor/pizza server');
-new PhotoSelect('Shark bag', 'img/shark.jpg' , 'A shark shaped sleeping bag');
-new PhotoSelect('Baby sweeper', 'img/sweep.png' , 'A combination floor mop/ baby onesie');
-new PhotoSelect('Tauntaun', 'img/tauntaun.jpg' , 'A tauntaun shaped sleeping bag');
-new PhotoSelect('Unicorn meat', 'img/unicorn.jpg' , 'Unicorn meat');
-new PhotoSelect('Tentacle USB', 'img/usb.gif' , 'A USB storage stick shaped like a tentacle');
-new PhotoSelect('Endless watering can', 'img/water-can.jpg' , 'A watering can whose spigot is turned back into the can ');
-new PhotoSelect('Off center wineglass', 'img/wine-glass.jpg' , 'A wineglass with an off-center lip');
-// instantiate first set
-PhotoSelect.randomPhoto();
-//need event listener for 'click'
-PhotoSelect.photoEventElement.addEventListener('click', PhotoSelect.clickAction);
-
-
 
 PhotoSelect.renderChart = function () {
   // var context = document.getElementById('results-chart'). getContext('2d');
@@ -181,8 +172,6 @@ PhotoSelect.renderChart = function () {
     '#808080',
     '#000000'
   ];
-
- 
 
   var ctx = document.getElementById("results-chart").getContext('2d');
   var myChart = new Chart(ctx, {
@@ -211,14 +200,30 @@ PhotoSelect.renderChart = function () {
   });
 };
 
-// what is needed for storage ? 
-// need to store PhotoSelect.totalVotes =[];
-// PhotoSelect.names = [];
-// user name field could be added - this info stored. 
 
-// -need to test if local storage is available 
-// -need to write function for save click and run at each click 
-// -need to write function resumeClick and run after local storage test
-// -storage --> into data if storage is present 
-//- click counter will need to be adjusted to allow for 25 more clicks and also remove evne listener after 25 more clicks 
--  
+// set array for photos ( use constructor)
+new PhotoSelect('R2D2 Bag', 'img/bag.jpg' , 'a bag shaped like R2-D2' );
+new PhotoSelect('Banana', 'img/banana.jpg' , 'a banana shaped banana slicer' );
+new PhotoSelect('Bathroom', 'img/bathroom.jpg' , 'a combination toilet paper roll/ tablet holder' );
+new PhotoSelect('Boots', 'img/boots.jpg' , 'soleless and toeless rain boots ' );
+new PhotoSelect('Breakfast', 'img/breakfast.jpg' , 'combination oven egg pan and coffee pot' );
+new PhotoSelect('Bubblegum', 'img/bubblegum.jpg' , 'meatball flavored bubble gum' );
+new PhotoSelect('Chair', 'img/chair.jpg' , 'a convex shaped chair' );
+new PhotoSelect('Cthulhu', 'img/cthulhu.jpg' , 'A monster of vaguely anthropoid outline, but with an octopus-like head whose face was a mass of feelers, a scaly, rubbery-looking body, prodigious claws on hind and fore feet, and long, narrow wings behind');
+new PhotoSelect('Dog-duck', 'img/dog-duck.jpg' , 'A picture of a dog with a plastic duck bill');
+new PhotoSelect('Dragon meat', 'img/dragon.jpg' , 'A can of dragon meat');
+new PhotoSelect('Pen utensils ', 'img/pen.jpg' , 'A pen with a fork knofe and spoon attachment');
+new PhotoSelect('Pet sweep', 'img/pet-sweep.jpg' , 'Sweeper attachment for your pets');
+new PhotoSelect('Pizza Scissors', 'img/scissors.jpg' , 'a combination scissor/pizza server');
+new PhotoSelect('Shark bag', 'img/shark.jpg' , 'A shark shaped sleeping bag');
+new PhotoSelect('Baby sweeper', 'img/sweep.png' , 'A combination floor mop/ baby onesie');
+new PhotoSelect('Tauntaun', 'img/tauntaun.jpg' , 'A tauntaun shaped sleeping bag');
+new PhotoSelect('Unicorn meat', 'img/unicorn.jpg' , 'Unicorn meat');
+new PhotoSelect('Tentacle USB', 'img/usb.gif' , 'A USB storage stick shaped like a tentacle');
+new PhotoSelect('Endless watering can', 'img/water-can.jpg' , 'A watering can whose spigot is turned back into the can ');
+new PhotoSelect('Off center wineglass', 'img/wine-glass.jpg' , 'A wineglass with an off-center lip');
+// instantiate first set
+PhotoSelect.randomPhoto();
+PhotoSelect.atStartCheckLocalStorage();
+//need event listener for 'click'
+PhotoSelect.photoEventElement.addEventListener('click', PhotoSelect.clickAction);
